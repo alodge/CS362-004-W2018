@@ -642,11 +642,11 @@ int getCost(int cardNumber)
 	
   return -1;
 }
-
-// implement adventurer card
+/***************************
+* Implement Adventurer Card
+****************************/
 int adventurerImplement(struct gameState *state, int *handPos, int *bonus, int currentPlayer, int drawntreasure, int cardDrawn)
 {
-
 	// copied from the initial function
   	int temphand[MAX_HAND];// moved above the if statement
   	int z = 0;// this is the counter for the temp hand
@@ -672,16 +672,89 @@ int adventurerImplement(struct gameState *state, int *handPos, int *bonus, int c
 		state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
 		z=z-1;
 	}
- 
+	return 0;
 }
 
+/***********************
+* Implement Smithy Card
+************************/
+int smithyImplement(struct gameState *state, int *handPos, int currentPlayer)
+{
+	// code copy and pasted from original dominion file
+	//+3 Cards
+	int i;
+	for (i = 0; i < 3; i++)
+	{
+		drawCard(currentPlayer, state);
+	}
+			
+	//discard card from hand
+	discardCard(handPos, currentPlayer, state, 0);
+	return 0;
+}
 
-// implement smithy card
-//int smithyImplement()
-//{
-//
-//}
+/***********************************
+ * Implement Outpost Card
+ **********************************/
+int outpostImplement(struct gameState *state, int *handPos, int currentPlayer)
+{
+	//set outpost flag
+	state->outpostPlayed++;
+			
+	//discard card
+	discardCard(handPos, currentPlayer, state, 0);
+	return 0;
+} 
 
+
+/**********************************
+ * Implement Village Card
+ *********************************/
+int villageImplement(struct gameState *state, int *handPos, int currentPlayer)
+{
+	//+1 Card
+	drawCard(currentPlayer, state);
+			
+	//+2 Actions
+	state->numActions = state->numActions + 2;
+			
+	//discard played card from hand
+	discardCard(handPos, currentPlayer, state, 0);
+	return 0;
+}	
+
+/**********************************
+ * Implement Council Room Card
+ *********************************/
+int council_roomImplement(struct gameState *state, int *handPos, int currentPlayer)
+{
+	//+4 Cards
+	for (i = 0; i < 4; i++)
+	{
+		drawCard(currentPlayer, state);
+	}
+			
+	//+1 Buy
+	state->numBuys++;
+			
+	//Each other player draws a card
+	for (i = 0; i < state->numPlayers; i++)
+	{
+		if ( i != currentPlayer )
+		{
+			drawCard(i, state);
+		}
+	}
+			
+	//put played card in played card pile
+	discardCard(handPos, currentPlayer, state, 0);
+	
+	return 0;
+}
+
+/*******************************
+ * Card Effect Function provided
+ *******************************/
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
 {
   int i;
@@ -702,9 +775,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   if (nextPlayer > (state->numPlayers - 1)){
     nextPlayer = 0;
   }
-
-
-  
 	
   //uses switch to select card and perform actions
   int returnValue;
@@ -713,35 +783,15 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
     case adventurer:
 
-	// parameter order for function implementation
-	// adventurerImplement(struct gameState *state, int *handPos, int *bonus, int currentPlayer, int drawnTreasure, int cardDrawn, int *temphand, int *z)
-	// int returnValue;
+	// Implemented in function per Assignment 2
 	returnValue = adventurerImplement(state, handPos, &bonus, currentPlayer, drawntreasure, cardDrawn);
 	return returnValue;
 			
     case council_room:
-      //+4 Cards
-      for (i = 0; i < 4; i++)
-	{
-	  drawCard(currentPlayer, state);
-	}
-			
-      //+1 Buy
-      state->numBuys++;
-			
-      //Each other player draws a card
-      for (i = 0; i < state->numPlayers; i++)
-	{
-	  if ( i != currentPlayer )
-	    {
-	      drawCard(i, state);
-	    }
-	}
-			
-      //put played card in played card pile
-      discardCard(handPos, currentPlayer, state, 0);
-			
-      return 0;
+
+	// Implemented in function per Assignment 2
+	returnValue = council_roomImplement(state, handPos, currentPlayer);
+	return returnValue;
 			
     case feast:
       //gain card with cost up to 5
@@ -861,26 +911,15 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case smithy:
-      //+3 Cards
-      for (i = 0; i < 3; i++)
-	{
-	  drawCard(currentPlayer, state);
-	}
-			
-      //discard card from hand
-      discardCard(handPos, currentPlayer, state, 0);
-      return 0;
+
+	// refactored into a function per assignment 2
+	returnValue = smithyImplement(state, handPos, currentPlayer);
+	return returnValue;
 		
     case village:
-      //+1 Card
-      drawCard(currentPlayer, state);
-			
-      //+2 Actions
-      state->numActions = state->numActions + 2;
-			
-      //discard played card from hand
-      discardCard(handPos, currentPlayer, state, 0);
-      return 0;
+
+	returnValue = villageImplement(state, handPos, currentPlayer);
+	return returnValue;
 		
     case baron:
       state->numBuys++;//Increase buys by 1!
@@ -1188,12 +1227,9 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case outpost:
-      //set outpost flag
-      state->outpostPlayed++;
-			
-      //discard card
-      discardCard(handPos, currentPlayer, state, 0);
-      return 0;
+      // Implement in Function per Assignment 2
+      returnValue = outpostImplement(state, handPos, currentPlayer);
+      return returnValue;
 		
     case salvager:
       //+1 buy
