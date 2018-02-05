@@ -728,6 +728,7 @@ int villageImplement(struct gameState *state, int *handPos, int currentPlayer)
  *********************************/
 int council_roomImplement(struct gameState *state, int *handPos, int currentPlayer)
 {
+	int i;
 	//+4 Cards
 	for (i = 0; i < 4; i++)
 	{
