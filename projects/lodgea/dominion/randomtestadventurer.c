@@ -39,7 +39,7 @@ int main() {
 	currentPlayer = 0;
 	int numPlayers;
 	int runs;
-	runs = 10000;
+	runs = 15;
 	int x, y, z, tries;
 	tries = 0;
 	z = 0;

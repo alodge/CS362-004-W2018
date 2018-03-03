@@ -523,8 +523,7 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state) {
 }
 
 int drawCard(int player, struct gameState *state)
-{	
-  int count;
+{	int count;
   int deckCounter;
   if (state->deckCount[player] <= 0){//Deck is empty
     
@@ -643,121 +642,7 @@ int getCost(int cardNumber)
 	
   return -1;
 }
-/***************************
-* Implement Adventurer Card
-****************************/
-int adventurerImplement(struct gameState *state, int *handPos, int *bonus, int currentPlayer, int drawntreasure, int cardDrawn)
-{
-	// copied from the initial function
-  	int temphand[MAX_HAND];// moved above the if statement
-  	int z = 0;// this is the counter for the temp hand
-	//
-	
-	while(drawntreasure<2){
-		if (state->deckCount[currentPlayer] <= 1){
-			//if the deck is empty we need to shuffle discard and add to deck
-	  		shuffle(currentPlayer, state);
-		}
-		drawCard(currentPlayer, state);
-		cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-		if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
-	  		drawntreasure++;
-		else 
-		{
-	  		temphand[z]=cardDrawn;
-	  		state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
-	  		z++;
-		}
-	}
-	while(z-1>=0){
-		state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
-		z=z-1;
-	}
-	return 0;
-}
 
-/***********************
-* Implement Smithy Card
-************************/
-int smithyImplement(struct gameState *state, int *handPos, int currentPlayer)
-{
-	// code copy and pasted from original dominion file
-	//+3 Cards
-	int i;
-	for (i = 0; i < 3; i++)
-	{
-		drawCard(currentPlayer, state);
-	}
-			
-	//discard card from hand
-	discardCard(handPos, currentPlayer, state, 0);
-	return 1;
-}
-
-/***********************************
- * Implement Outpost Card
- **********************************/
-int outpostImplement(struct gameState *state, int *handPos, int currentPlayer)
-{
-	//set outpost flag
-	state->outpostPlayed++;
-			
-	//discard card
-	discardCard(handPos, currentPlayer+1, state, 0);
-	return 0;
-} 
-
-
-/**********************************
- * Implement Village Card
- *********************************/
-int villageImplement(struct gameState *state, int *handPos, int currentPlayer)
-{
-	
-	//+1 Card
-	drawCard(currentPlayer, state);
-			
-	//+2 Actions
-	state->numActions++;
-			
-	//discard played card from hand
-	discardCard(handPos, currentPlayer, state, 0);
-	return 0;
-}	
-
-/**********************************
- * Implement Council Room Card
- *********************************/
-int council_roomImplement(struct gameState *state, int *handPos, int currentPlayer)
-{
-	int i;
-	//+4 Cards
-	for (i = 0; i < 4; i++)
-	{
-		drawCard(currentPlayer, state);
-	}
-			
-	//+1 Buy
-	state->numBuys++;
-			
-	//Each other player draws a card
-	for (i = 0; i <= state->numPlayers; i++)
-	{
-		if ( i != currentPlayer )
-		{
-			drawCard(i, state);
-		}
-	}
-			
-	//put played card in played card pile
-	discardCard(handPos, currentPlayer, state, 0);
-	
-	return 0;
-}
-
-/*******************************
- * Card Effect Function provided
- *******************************/
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
 {
   int i;
@@ -770,31 +655,61 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
   int tributeRevealedCards[2] = {-1, -1};
   int temphand[MAX_HAND];// moved above the if statement
-
-
   int drawntreasure=0;
   int cardDrawn;
   int z = 0;// this is the counter for the temp hand
   if (nextPlayer > (state->numPlayers - 1)){
     nextPlayer = 0;
   }
+  
 	
   //uses switch to select card and perform actions
-  int returnValue;
   switch( card ) 
     {
-
     case adventurer:
-
-	// Implemented in function per Assignment 2
-	returnValue = adventurerImplement(state, handPos, &bonus, currentPlayer, drawntreasure, cardDrawn);
-	return returnValue;
+      while(drawntreasure<2){
+	if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
+	  shuffle(currentPlayer, state);
+	}
+	drawCard(currentPlayer, state);
+	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
+	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
+	  drawntreasure++;
+	else{
+	  temphand[z]=cardDrawn;
+	  state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
+	  z++;
+	}
+      }
+      while(z-1>=0){
+	state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
+	z=z-1;
+      }
+      return 0;
 			
     case council_room:
-
-	// Implemented in function per Assignment 2
-	returnValue = council_roomImplement(state, handPos, currentPlayer);
-	return returnValue;
+      //+4 Cards
+      for (i = 0; i < 4; i++)
+	{
+	  drawCard(currentPlayer, state);
+	}
+			
+      //+1 Buy
+      state->numBuys++;
+			
+      //Each other player draws a card
+      for (i = 0; i < state->numPlayers; i++)
+	{
+	  if ( i != currentPlayer )
+	    {
+	      drawCard(i, state);
+	    }
+	}
+			
+      //put played card in played card pile
+      discardCard(handPos, currentPlayer, state, 0);
+			
+      return 0;
 			
     case feast:
       //gain card with cost up to 5
@@ -914,15 +829,26 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case smithy:
-
-	// refactored into a function per assignment 2
-	returnValue = smithyImplement(state, handPos, currentPlayer);
-	return returnValue;
+      //+3 Cards
+      for (i = 0; i < 3; i++)
+	{
+	  drawCard(currentPlayer, state);
+	}
+			
+      //discard card from hand
+      discardCard(handPos, currentPlayer, state, 0);
+      return 0;
 		
     case village:
-
-	returnValue = villageImplement(state, handPos, currentPlayer);
-	return returnValue;
+      //+1 Card
+      drawCard(currentPlayer, state);
+			
+      //+2 Actions
+      state->numActions = state->numActions + 2;
+			
+      //discard played card from hand
+      discardCard(handPos, currentPlayer, state, 0);
+      return 0;
 		
     case baron:
       state->numBuys++;//Increase buys by 1!
@@ -1230,9 +1156,12 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case outpost:
-      // Implement in Function per Assignment 2
-      returnValue = outpostImplement(state, handPos, currentPlayer);
-      return returnValue;
+      //set outpost flag
+      state->outpostPlayed++;
+			
+      //discard card
+      discardCard(handPos, currentPlayer, state, 0);
+      return 0;
 		
     case salvager:
       //+1 buy
@@ -1401,4 +1330,3 @@ int updateCoins(int player, struct gameState *state, int bonus)
 
 
 //end of dominion.c
-
