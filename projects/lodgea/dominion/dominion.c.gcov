@@ -721,7 +721,7 @@
     #####:  716:	drawCard(currentPlayer, state);
         -:  717:			
         -:  718:	//+2 Actions
-    #####:  719:	state->numActions = state->numActions++;
+    #####:  719:	state->numActions = state->numActions + 2;
         -:  720:			
         -:  721:	//discard played card from hand
     #####:  722:	discardCard(handPos, currentPlayer, state, 0);
