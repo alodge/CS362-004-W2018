@@ -1,0 +1,41 @@
+BUG 1 - ADVENTURER CARD
+	
+Test Case Inputs
+  Seed: 15
+  numPlayers = 3
+  currentPlayer = 2
+  Initial Hand Count (before playing card) = 5
+  Final Hand Count (after playing card) = 5
+  Hand (randomized order) = 19 11 8 21 17 7 13 22 14 25
+  cards = 0
+
+Expected Output
+  Final Hand Count should be 2 bigger than the initial
+
+Actual Output
+  Final Hand Count was the same as the initial
+
+Instructions for reproduction
+  Platform Details – this was compiled and run on Flip, the OSU engineering server.
+  Version of SUT
+      James Daniel’s code with Bugs Introduced in Assignment 2
+
+BUG 2 - COUNCIL ROOM CARD
+
+Test Case Inputs
+  seed 15
+  Number of Players = 2
+  Current Player = 0
+
+Expected Output
+  Number of buys should increment one
+  Deck size after playing card should be up 4
+
+Actual Output
+  Number of buys decremented instead of incremented
+  Deck size was the same both before and after
+
+Instructions for reproduction
+    Platform Details – this was compiled and run on Flip, the OSU engineering server.
+    Version of SUT
+      James Daniel’s code with Bugs Introduced in Assignment 2
