@@ -1,9 +1,6 @@
 RESULTS FOR RUNNING DOMINION UNIT TESTS:
 ****************************************
 unittest1.c:
-RESULTS FOR RUNNING DOMINION UNIT TESTS:
-****************************************
-unittest1.c:
 Testing Supply Count.
 curse: 10
 estate: 8
@@ -29,8 +26,8 @@ Creating 'dominion.c.gcov'
 
 unittest3.c:
 Testing isGameOver().
-Game over for zero Province cards 20144 times out of 100000 randomly generated attempts
-Game should have ended for 0 province cards 20144 times
+Game over for zero Province cards 20178 times out of 100000 randomly generated attempts
+Game should have ended for 0 province cards 20178 times
 Correctly ended game 100000 out of 100000 randomly generated attempts
 File 'dominion.c'
 Lines executed:17.73% of 564
