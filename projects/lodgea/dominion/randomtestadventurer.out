@@ -7,60 +7,80 @@ FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 1
    numPlayers = 3
    currentPlayer = 1
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 25 19 21 17 14 8 22 7 13 11 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 3
    numPlayers = 2
    currentPlayer = 1
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 17 22 11 8 14 7 25 13 21 19 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 5
    numPlayers = 3
    currentPlayer = 2
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 8 7 13 21 25 17 22 11 19 14 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 6
    numPlayers = 3
    currentPlayer = 2
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 19 11 22 13 21 8 17 25 7 14 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 7
    numPlayers = 3
    currentPlayer = 1
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 8 11 25 14 19 21 13 22 17 7 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 8
    numPlayers = 3
    currentPlayer = 2
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 22 7 13 21 25 11 14 19 8 17 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 10
    numPlayers = 2
    currentPlayer = 1
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 19 14 13 8 25 7 22 17 21 11 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 11
    numPlayers = 3
    currentPlayer = 2
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 21 13 19 7 11 14 8 25 22 17 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 14
    numPlayers = 3
    currentPlayer = 2
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 7 13 25 14 11 19 8 17 22 21 
    cards: 0
 FAILURE: HAND COUNT DIDN'T CHANGE 2
    Seed = 15
    numPlayers = 3
    currentPlayer = 2
+   Initial Hand Count = 5
+   Final Hand Count = 5
    hand = 19 11 8 21 17 7 13 22 14 25 
    cards: 0
 Adventurer passed 5 out of 15 attempts

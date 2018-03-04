@@ -1,8 +1,3 @@
-RESULTS FOR RUNNING DOMINION UNIT TESTS:
-****************************************
-unittest1.c:
-RESULTS FOR RUNNING DOMINION UNIT TESTS:
-****************************************
 unittest1.c:
 Testing Supply Count.
 curse: 10
@@ -14,7 +9,7 @@ silver: 40
 gold: 30
 The supplyCount() function passed 7 out of 7 tests.
 File 'dominion.c'
-Lines executed:16.13% of 564
+Lines executed:16.61% of 548
 Creating 'dominion.c.gcov'
 
 unittest2.c:
@@ -24,16 +19,16 @@ Testing Full Deck Count.
 Supply Count passed 3 of 3 tests.
 Each test ran the fullDeckCount() function 15 times using randomly assigned card values.
 File 'dominion.c'
-Lines executed:17.55% of 564
+Lines executed:18.07% of 548
 Creating 'dominion.c.gcov'
 
 unittest3.c:
 Testing isGameOver().
-Game over for zero Province cards 20144 times out of 100000 randomly generated attempts
-Game should have ended for 0 province cards 20144 times
+Game over for zero Province cards 19963 times out of 100000 randomly generated attempts
+Game should have ended for 0 province cards 19963 times
 Correctly ended game 100000 out of 100000 randomly generated attempts
 File 'dominion.c'
-Lines executed:17.73% of 564
+Lines executed:18.25% of 548
 Creating 'dominion.c.gcov'
 
 unittest4.c:
@@ -42,42 +37,6 @@ Testing getCost() function
 *****************
 Correctly got cost 10000 times out of 10000
 File 'dominion.c'
-Lines executed:4.96% of 564
-Creating 'dominion.c.gcov'
-
-cardtest1.c:
-**********************
-Testing smithy card.
-**********************
-Smithy passed 30000 out of 30000 tests
-File 'dominion.c'
-Lines executed:20.74% of 564
-Creating 'dominion.c.gcov'
-
-cardtest2.c:
-***************
-Testing adventurer card.
-***************
-Adventurer passed 1 out of 1 attempts
-File 'dominion.c'
-Lines executed:19.50% of 564
-Creating 'dominion.c.gcov'
-
-cardtest3.c:
-*****************
-Testing village card.
-*****************
-Village passed 0 out of 90000 attempts
-File 'dominion.c'
-Lines executed:21.81% of 564
-Creating 'dominion.c.gcov'
-
-cardtest4.c:
-*****************
-Testing council_room card.
-*****************
-council_room passed 90000 out of 90000 attempts
-File 'dominion.c'
-Lines executed:24.11% of 564
+Lines executed:5.11% of 548
 Creating 'dominion.c.gcov'
 

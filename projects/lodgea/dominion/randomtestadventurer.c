@@ -184,6 +184,8 @@ int main() {
 			printf("   Seed = %d\n", x+1);
 			printf("   numPlayers = %d\n", numPlayers);
 			printf("   currentPlayer = %d\n", G.whoseTurn);
+			printf("   Initial Hand Count = %d\n", G.handCount[currentPlayer]);
+			printf("   Final Hand Count = %d\n", testG.handCount[currentPlayer]);
 			printf("   hand = ");
 			for (p = 0; p < 10; p++)
 			{
